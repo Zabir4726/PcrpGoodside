@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTAL REKRUTMEN GOODSIDE - PEACEFULLY CITY</title>
+    <title>PORTAL REKRUTMEN BADSIDE - PEACEFULLY CITY</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -11,17 +11,17 @@
     
     <style>
         :root {
-            --bg-light: #fdfdfa; /* Putih hangat premium */
-            --card-bg: #ffffff;
-            --primary: #e6b800; /* Kuning emas solid agar terbaca jelas di background putih */
-            --primary-light: #fff9db;
-            --primary-glow: rgba(230, 184, 0, 0.15);
-            --text-main: #1f2937; /* Gelap abu tua premium */
-            --text-muted: #6b7280;
-            --border-color: #f3f4f6;
-            --input-bg: #f9fafb;
+            --bg-dark: #07070a;
+            --card-bg: rgba(14, 14, 19, 0.93);
+            --primary: #ffcc00;
+            --primary-glow: rgba(255, 204, 0, 0.2);
+            --bad-red: #ff3333;
+            --bad-red-glow: rgba(255, 51, 51, 0.25);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 51, 51, 0.2);
+            --input-bg: rgba(8, 8, 12, 0.9);
             --warning-orange: #ff9900;
-            --warning-bg: #fff7ed;
         }
 
         * {
@@ -32,7 +32,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-light);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -40,8 +40,8 @@
             align-items: center;
             padding: 20px;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(230, 184, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 85% 85%, rgba(230, 184, 0, 0.03) 0%, transparent 50%);
+                radial-gradient(circle at 15% 15%, rgba(255, 51, 51, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(255, 204, 0, 0.03) 0%, transparent 45%);
             background-attachment: fixed;
         }
 
@@ -53,16 +53,18 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid #e5e7eb;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 51, 51, 0.03);
         }
 
         .header {
             text-align: center;
             margin-bottom: 25px;
-            border-bottom: 2px dashed #f3f4f6;
+            border-bottom: 2px dashed rgba(255, 51, 51, 0.15);
             padding-bottom: 20px;
         }
 
@@ -70,45 +72,52 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.75rem;
             font-weight: 700;
-            color: #111827;
-            letter-spacing: 0.5px;
+            color: #fff;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 6px;
         }
 
-        .header h1 span {
+        .header h1 span:first-child {
             color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+        
+        .header h1 span.red-text {
+            color: var(--bad-red);
+            text-shadow: 0 0 10px var(--bad-red-glow);
         }
 
         .header p {
             font-size: 0.85rem;
             color: var(--text-muted);
+            letter-spacing: 0.5px;
         }
 
         .syarat-box {
-            background: var(--primary-light);
-            border: 1px dashed var(--primary);
+            background: rgba(255, 51, 51, 0.05);
+            border: 1px dashed var(--bad-red);
             border-radius: 8px;
             padding: 12px 15px;
             margin-bottom: 25px;
             font-size: 0.85rem;
-            color: #b38f00;
+            color: #ff5555;
             display: flex;
             align-items: center;
             gap: 10px;
-            font-weight: 700;
+            font-weight: 600;
         }
 
-        /* NOTIFIKASI JIKA LEAD KOSONG */
+        /* BANNER WARNING JIKA LEAD KOSONG */
         .no-lead-box {
-            background: var(--warning-bg);
+            background: rgba(255, 153, 0, 0.08);
             border: 1px solid var(--warning-orange);
             border-radius: 8px;
             padding: 12px 15px;
             margin-bottom: 20px;
             font-size: 0.85rem;
-            color: #c2410c;
-            display: none; /* Diatur via JS */
+            color: var(--warning-orange);
+            display: none; /* Muncul via JS */
             align-items: center;
             gap: 10px;
             font-weight: 600;
@@ -121,11 +130,11 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
         }
 
-        /* === 12 FACTION LIST GRID SELECTOR === */
+        /* === 9 FACTION BADSIDE LIST GRID === */
         .divisi-title {
             font-size: 0.85rem;
             font-weight: 800;
-            color: #111827;
+            color: #fff;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 14px;
@@ -147,11 +156,11 @@
         }
 
         .divisi-btn {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            padding: 13px 15px;
-            color: #4b5563;
+            padding: 14px 15px;
+            color: #d1d5db;
             font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
@@ -167,23 +176,26 @@
             text-align: center;
             color: var(--text-muted);
         }
+        
         .divisi-btn:hover {
-            background: #f3f4f6;
-            border-color: #d1d5db;
-            color: #111827;
+            background: rgba(255, 51, 51, 0.03);
+            border-color: rgba(255, 51, 51, 0.3);
+            color: #fff;
         }
+        
         .divisi-btn.active {
-            background: var(--primary-light);
-            border-color: var(--primary);
-            color: #806600;
+            background: rgba(255, 204, 0, 0.08);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.15);
         }
         .divisi-btn.active i {
             color: var(--primary);
         }
 
-        /* === FORM CONTAINER DYNAMIC ANIMATION === */
+        /* === FORM CONTAINER ANIMATION === */
         #containerFormPendaftaran {
-            border-top: 1px dashed #e5e7eb;
+            border-top: 1px dashed rgba(255, 51, 51, 0.2);
             padding-top: 10px;
             display: none;
             animation: fadeInForm 0.4s ease-out forwards;
@@ -204,9 +216,9 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
-            color: #806600;
-            background: var(--primary-light);
+            letter-spacing: 2px;
+            color: var(--primary);
+            background: rgba(255, 204, 0, 0.08);
             padding: 4px 12px;
             border-radius: 4px;
             text-transform: uppercase;
@@ -217,7 +229,7 @@
             flex: 1;
             margin-left: 10px;
             height: 1px;
-            background: #e5e7eb;
+            background: rgba(255, 51, 51, 0.15);
         }
 
         .form-group {
@@ -229,7 +241,7 @@
             font-size: 0.78rem;
             font-weight: 700;
             margin-bottom: 6px;
-            color: #374151;
+            color: #e5e7eb;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -237,10 +249,10 @@
         .form-control {
             width: 100%;
             background: var(--input-bg);
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 8px;
             padding: 11px 14px;
-            color: #111827;
+            color: #fff;
             font-family: inherit;
             font-size: 0.88rem;
             transition: all 0.3s ease;
@@ -249,8 +261,7 @@
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            background: #ffffff;
-            box-shadow: 0 0 10px rgba(230, 184, 0, 0.15);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.12);
         }
 
         textarea.form-control {
@@ -268,14 +279,13 @@
 
         .radio-toggle-group label {
             background: var(--input-bg);
-            border: 1px solid #e5e7eb;
+            border: 1px solid rgba(255, 255, 255, 0.07);
             padding: 10px;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.85rem;
-            color: #4b5563;
             transition: all 0.2s ease;
             display: flex;
             justify-content: center;
@@ -288,15 +298,15 @@
         }
 
         .radio-toggle-group input[type="radio"]:checked + label {
-            background: var(--primary-light);
+            background: rgba(255, 204, 0, 0.08);
             border-color: var(--primary);
-            color: #806600;
-            font-weight: 700;
+            color: var(--primary);
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.1);
         }
 
         .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, #ffcc00 0%, #e6b800 100%);
+            background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
             border: none;
             border-radius: 8px;
             padding: 14px;
@@ -316,16 +326,16 @@
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(230, 184, 0, 0.25);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.25);
         }
 
-        /* Variasi tombol pas faksi rute owner */
+        /* Variasi warna tombol submit pas faksi dialihkan ke owner */
         .btn-submit.owner-route {
-            background: linear-gradient(135deg, #ff9900 0%, #ea580c 100%);
+            background: linear-gradient(135deg, #ff9900 0%, #ff5500 100%);
             color: #fff;
         }
         .btn-submit.owner-route:hover {
-            box-shadow: 0 8px 20px rgba(234, 88, 12, 0.25);
+            box-shadow: 0 8px 20px rgba(255, 153, 0, 0.3);
         }
 
         .footer-note {
@@ -342,58 +352,49 @@
     <div class="card">
         
         <div class="header">
-            <h1><span>PEACEFULLY CITY</span> REGISTRATION</h1>
-            <p>Portal Resmi Pendaftaran Divisi & Faksi Pemerintahan (Goodside)</p>
+            <h1><span>PEACEFULLY CITY</span> <span class="red-text">BADSIDE</span></h1>
+            <p>Portal Resmi Pendaftaran Keluarga, Gang, & Sindikat Kriminal</p>
         </div>
 
         <div class="syarat-box">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>SYARAT MUTLAK: Level Karakter Minimal Level 7 In-Game!</span>
+            <i class="fa-solid fa-skull-crossbones"></i>
+            <span>SYARAT KHUSUS: Level Karakter Minimal Level 7 In-Game!</span>
         </div>
 
-        <div class="divisi-title"><i class="fa-solid fa-list-check" style="color:var(--primary)"></i> Pilih Faksi / Instansi:</div>
+        <div class="divisi-title"><i class="fa-solid fa-mask" style="color:var(--primary)"></i> Pilih Faksi / Keluarga:</div>
         <div class="divisi-grid">
-            <button class="divisi-btn" onclick="pilihDivisiForm('POLISI_LOS_SANTOS', this)">
-                <i class="fa-solid fa-shield-halved"></i> 1. Polisi Los Santos
+            <button class="divisi-btn" onclick="pilihDivisiForm('EAST_SIDE_BALLAS', this)">
+                <i class="fa-solid fa-circle" style="color: #bf55ec;"></i> 1. East Side Ballas
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('POLISI_SAN_FIERRO', this)">
-                <i class="fa-solid fa-shield-halved"></i> 2. Polisi San Fierro
+            <button class="divisi-btn" onclick="pilihDivisiForm('LOS_SANTOS_VAGOS', this)">
+                <i class="fa-solid fa-circle" style="color: #ffcc00;"></i> 2. Los Santos Vagos
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('POLISI_LAS_VENTURAS', this)">
-                <i class="fa-solid fa-shield-halved"></i> 3. Polisi Las Venturas
+            <button class="divisi-btn" onclick="pilihDivisiForm('GROVE_STREET', this)">
+                <i class="fa-solid fa-circle" style="color: #00ff66;"></i> 3. Grove Street
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('ADMINISTRASI_PRESIDEN_LOS_SANTOS', this)">
-                <i class="fa-solid fa-crown"></i> 4. Pemerintah Los Santos
+            <button class="divisi-btn" onclick="pilihDivisiForm('VARRIOS_LOS_AZTECAS', this)">
+                <i class="fa-solid fa-circle" style="color: #00d4ff;"></i> 4. Varrios Los Aztecas
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('RUMAH_SAKIT_LOS_SANTOS', this)">
-                <i class="fa-solid fa-house-medical"></i> 5. Rumah Sakit LS
+            <button class="divisi-btn" onclick="pilihDivisiForm('RIFA', this)">
+                <i class="fa-solid fa-circle" style="color: #22a7f0;"></i> 5. Rifa
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('RUMAH_SAKIT_SAN_FIERRO', this)">
-                <i class="fa-solid fa-house-medical"></i> 6. Rumah Sakit SF
+            <button class="divisi-btn" onclick="pilihDivisiForm('YAKUZA_MAFIA', this)">
+                <i class="fa-solid fa-crosshairs" style="color: #ff3366;"></i> 7. Yakuza Mafia
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('RUMAH_SAKIT_LAS_VENTURAS', this)">
-                <i class="fa-solid fa-house-medical"></i> 7. Rumah Sakit LV
+            <button class="divisi-btn" onclick="pilihDivisiForm('RUSSIAN_MAFIA', this)">
+                <i class="fa-solid fa-gun" style="color: #5c97bf;"></i> 8. Russian Mafia
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('PUSAT_RADIO', this)">
-                <i class="fa-solid fa-radio"></i> 8. Pusat Radio
+            <button class="divisi-btn" onclick="pilihDivisiForm('COLOUMBIAN_MAFIA', this)">
+                <i class="fa-solid fa-box-tissue" style="color: #d35400;"></i> 9. Coloumbian Mafia
             </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('FBI', this)">
-                <i class="fa-solid fa-user-tie"></i> 9. FBI
-            </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('TENTARA_LS', this)">
-                <i class="fa-solid fa-person-military-rifle"></i> 10. Tentara LS
-            </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('ANGKATAN_LAUT', this)">
-                <i class="fa-solid fa-ship"></i> 11. Angkatan Laut
-            </button>
-            <button class="divisi-btn" onclick="pilihDivisiForm('ANGKATAN_UDARA', this)">
-                <i class="fa-solid fa-jet-fighter"></i> 12. Angkatan Udara
+            <button class="divisi-btn" onclick="pilihDivisiForm('BANDIDOS_MC', this)">
+                <i class="fa-solid fa-motorcycle" style="color: #abb7b7;"></i> 10. Bandidos MC
             </button>
         </div>
 
         <div id="alertNoLead" class="no-lead-box">
             <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>PEMBERITAHUAN: Instansi ini sedang kosong (Tidak ada Leader). Form pendaftaran Anda akan otomatis dialihkan langsung ke Owner Server!</span>
+            <span>PEMBERITAHUAN: Faksi ini sedang tidak memiliki Leader. Form pendaftaran Anda akan otomatis dialihkan langsung ke Owner Server!</span>
         </div>
 
         <div id="containerFormPendaftaran">
@@ -405,22 +406,22 @@
 
                 <div class="form-group">
                     <label for="ooc_nama">NAMA:</label>
-                    <input type="text" id="ooc_nama" class="form-control" placeholder="Masukkan nama OOC lu..." required>
+                    <input type="text" id="ooc_nama" class="form-control" placeholder="Masukkan nama OOC asli lu..." required>
                 </div>
 
                 <div class="form-group">
                     <label for="ooc_umur">UMUR:</label>
-                    <input type="number" id="ooc_umur" class="form-control" placeholder="Contoh: 17" required>
+                    <input type="number" id="ooc_umur" class="form-control" placeholder="Contoh: 16" required>
                 </div>
 
                 <div class="form-group">
                     <label for="ooc_lama_main">SUDAH BERAPA LAMA MAIN SA-MP:</label>
-                    <input type="text" id="ooc_lama_main" class="form-control" placeholder="Contoh: 1 Tahun / 6 Bulan" required>
+                    <input type="text" id="ooc_lama_main" class="form-control" placeholder="Contoh: 2 Tahun / 8 Bulan" required>
                 </div>
 
                 <div class="form-group">
                     <label for="ooc_jam_main">PALING LAMA MAIN SA-MP BERAPA JAM:</label>
-                    <input type="text" id="ooc_jam_main" class="form-control" placeholder="Contoh: 5 Jam sehari" required>
+                    <input type="text" id="ooc_jam_main" class="form-control" placeholder="Contoh: 6 Jam sehari" required>
                 </div>
 
                 <div class="section-divider">
@@ -429,12 +430,12 @@
 
                 <div class="form-group">
                     <label for="ic_nama">NAMA:</label>
-                    <input type="text" id="ic_nama" class="form-control" placeholder="Contoh: Lamar_Smith" required>
+                    <input type="text" id="ic_nama" class="form-control" placeholder="Contoh: Caesar_Vialpando" required>
                 </div>
 
                 <div class="form-group">
                     <label for="ic_umur">UMUR:</label>
-                    <input type="number" id="ic_umur" class="form-control" placeholder="Contoh: 25" required>
+                    <input type="number" id="ic_umur" class="form-control" placeholder="Contoh: 24" required>
                 </div>
 
                 <div class="form-group">
@@ -444,7 +445,7 @@
 
                 <div class="form-group">
                     <label for="ic_lama_sini">SUDAH BERAPA LAMA MAIN DISINI?:</label>
-                    <input type="text" id="ic_lama_sini" class="form-control" placeholder="Contoh: 3 Minggu" required>
+                    <input type="text" id="ic_lama_sini" class="form-control" placeholder="Contoh: 1 Bulan" required>
                 </div>
 
                 <div class="section-divider">
@@ -472,7 +473,7 @@
                 </div>
 
                 <div class="section-divider">
-                    <span>Syarat Kelengkapan</span>
+                    <span>Surat Izin Berkas</span>
                 </div>
 
                 <div class="form-group">
@@ -498,10 +499,10 @@
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn-submit">
-                    <i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> SELESAI & KIRIM KE WA LEAD
+                    <i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> SUBMIT & KIRIM KE LEAD FACTION
                 </button>
 
-                <p class="footer-note">Susunan teks otomatis rapi and langsung dialihkan ke nomor WhatsApp.</p>
+                <p class="footer-note">Teks otomatis disusun rapi sesuai format UCP and dialihkan ke WhatsApp.</p>
             </form>
         </div>
 
@@ -510,23 +511,20 @@
 
 <script>
     // === CONFIG DATA: NOMOR WHATSAPP OWNER SERVER ===
-    const NOMOR_WHATSAPP_OWNER = "6285145204961"; // <-- AMANKAN/GANTI NOMOR OWNER DI SINI
+    const NOMOR_WHATSAPP_OWNER = "6285145204961"; // <-- GANTI DENGAN NOMOR OWNER UTAMA DISINI
 
-    // === CONFIG DATA: DATABASE NOMOR WHATSAPP LEAD 12 FACTION ===
-    // Kosongkan (ubah menjadi "") jika faksi tersebut sedang tidak ada Lead aktifnya!
+    // === CONFIG DATA: DATABASE NOMOR WHATSAPP LEAD FACTION ===
+    // KOSONGKAN (buat tanda kutip dua "" tanpa angka) jika faksi tersebut sedangan tidak ada Lead-nya!
     const databaseNomorLead = {
-        POLISI_LOS_SANTOS: "6288297110741",
-        POLISI_SAN_FIERRO: "",                // <--- CONTOH JIKA FA KOSONG (KOSONGKAN REKAN)
-        POLISI_LAS_VENTURAS: "",
-        ADMINISTRASI_PRESIDEN_LOS_SANTOS: "6283186723104",
-        RUMAH_SAKIT_LOS_SANTOS: "62812-30724539",
-        RUMAH_SAKIT_SAN_FIERRO: "",
-        RUMAH_SAKIT_LAS_VENTURAS: "",
-        PUSAT_RADIO: "",                      // <--- CONTOH JIKA FA KOSONG
-        FBI: "6285730631250",
-        TENTARA_LS: "",
-        ANGKATAN_LAUT: "6281358511088",
-        ANGKATAN_UDARA: ""
+        EAST_SIDE_BALLAS: "6282211725001",
+        LOS_SANTOS_VAGOS: "6282196785254",            // <--- CONTOH KOSONG / GA ADA LEAD
+        GROVE_STREET: "6287812444884",
+        VARRIOS_LOS_AZTECAS: "62882007911200",         // <--- CONTOH KOSONG / GA ADA LEAD
+        RIFA: "",
+        YAKUZA_MAFIA: "6285693041162",
+        RUSSIAN_MAFIA: "628985601290",
+        COLOUMBIAN_MAFIA: "6285283156862",
+        BANDIDOS_MC: "6282136426167"
     };
 
     let faksiAktifSaatIni = "";
@@ -542,28 +540,28 @@
         document.getElementById('ic_faksi').value = namaBersihFaksi;
         document.getElementById('labelFaksiTerpilih').innerText = "FORM OOC - " + namaBersihFaksi;
 
-        // SISTEM VALIDASI DETEKSI LEAD KOSONG
+        // CEK APAKAH FA KOSONG / TIDAK ADA LEAD
         const alertBox = document.getElementById('alertNoLead');
         const submitBtn = document.getElementById('submitBtn');
         
         if (!databaseNomorLead[keyFaksi] || databaseNomorLead[keyFaksi].trim() === "") {
             statusFaksiTanpaLead = true;
-            alertBox.style.display = "flex"; // Tampilkan Banner Alert Oranye-Merah hangat
+            alertBox.style.display = "flex"; // Tampilkan Banner Warning
             submitBtn.classList.add('owner-route');
             submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> HUBUNGI & DAFTAR CHAT OWNER`;
         } else {
             statusFaksiTanpaLead = false;
-            alertBox.style.display = "none";  // Sembunyikan Banner
+            alertBox.style.display = "none";  // Sembunyikan Banner Warning
             submitBtn.classList.remove('owner-route');
-            submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> SELESAI & KIRIM KE WA LEAD`;
+            submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> SUBMIT & KIRIM KE LEAD FACTION`;
         }
 
-        // Buka form pendaftaran di bawah grid
+        // Buka form pendaftaran
         document.getElementById('containerFormPendaftaran').style.display = "block";
         document.getElementById('containerFormPendaftaran').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // === SCRIPT KIRIM DIRECT WHATSAPP ===
+    // === GENERATE TEXT & WA FORWARD ENGINE ===
     document.getElementById('formPendaftaran').addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -584,13 +582,13 @@
         const licGun = document.querySelector('input[name="lic_gun"]:checked').value;
         const csStatus = document.querySelector('input[name="cs_status"]:checked').value;
 
-        // Arahkan ke Owner jika faksi tersebut di-set kosong nomornya
+        // Logika penentuan nomor tujuan WA (Gunakan nomor owner jika faksi kosong)
         let targetNoWA = databaseNomorLead[faksiAktifSaatIni];
         if (statusFaksiTanpaLead || !targetNoWA || targetNoWA.trim() === "") {
             targetNoWA = NOMOR_WHATSAPP_OWNER;
         }
 
-        // Struktur format teks wajib
+        // Struktur template teks wajib
         let textFormat = `//===========================//\n`;
         if (statusFaksiTanpaLead) {
             textFormat += `*⚠️ [PENDAFTARAN ALIH OWNER - FARE KOSONG]*\n`;

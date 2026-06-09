@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTAL REKRUTMEN FACTION - PEACEFULLY CITY</title>
+    <title>PORTAL REKRUTMEN GOODSIDE - PEACEFULLY CITY</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -11,14 +11,17 @@
     
     <style>
         :root {
-            --bg-dark: #08090d;
-            --card-bg: rgba(16, 18, 26, 0.9);
-            --primary: #ffcc00;
-            --primary-glow: rgba(255, 204, 0, 0.25);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: rgba(255, 204, 0, 0.15);
-            --input-bg: rgba(10, 11, 16, 0.85);
+            --bg-light: #fdfdfa; /* Putih hangat premium */
+            --card-bg: #ffffff;
+            --primary: #e6b800; /* Kuning emas solid agar terbaca jelas di background putih */
+            --primary-light: #fff9db;
+            --primary-glow: rgba(230, 184, 0, 0.15);
+            --text-main: #1f2937; /* Gelap abu tua premium */
+            --text-muted: #6b7280;
+            --border-color: #f3f4f6;
+            --input-bg: #f9fafb;
+            --warning-orange: #ff9900;
+            --warning-bg: #fff7ed;
         }
 
         * {
@@ -29,7 +32,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-light);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -37,8 +40,8 @@
             align-items: center;
             padding: 20px;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(255, 204, 0, 0.04) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(255, 204, 0, 0.04) 0%, transparent 45%);
+                radial-gradient(circle at 15% 15%, rgba(230, 184, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(230, 184, 0, 0.03) 0%, transparent 50%);
             background-attachment: fixed;
         }
 
@@ -50,18 +53,16 @@
 
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid var(--border-color);
+            border: 1px solid #e5e7eb;
             border-radius: 16px;
             padding: 30px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(255, 204, 0, 0.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
         .header {
             text-align: center;
             margin-bottom: 25px;
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.08);
+            border-bottom: 2px dashed #f3f4f6;
             padding-bottom: 20px;
         }
 
@@ -69,15 +70,14 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.75rem;
             font-weight: 700;
-            color: #fff;
-            letter-spacing: 1px;
+            color: #111827;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
             margin-bottom: 6px;
         }
 
         .header h1 span {
             color: var(--primary);
-            text-shadow: 0 0 10px var(--primary-glow);
         }
 
         .header p {
@@ -86,24 +86,46 @@
         }
 
         .syarat-box {
-            background: rgba(255, 204, 0, 0.05);
+            background: var(--primary-light);
             border: 1px dashed var(--primary);
             border-radius: 8px;
             padding: 12px 15px;
             margin-bottom: 25px;
             font-size: 0.85rem;
-            color: var(--primary);
+            color: #b38f00;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 700;
+        }
+
+        /* NOTIFIKASI JIKA LEAD KOSONG */
+        .no-lead-box {
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-orange);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #c2410c;
+            display: none; /* Diatur via JS */
+            align-items: center;
+            gap: 10px;
             font-weight: 600;
+            animation: pulseWarning 2s infinite;
+        }
+
+        @keyframes pulseWarning {
+            0% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.2); }
+            70% { box-shadow: 0 0 0 8px rgba(255, 153, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
         }
 
         /* === 12 FACTION LIST GRID SELECTOR === */
         .divisi-title {
             font-size: 0.85rem;
             font-weight: 800;
-            color: #fff;
+            color: #111827;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 14px;
@@ -125,12 +147,12 @@
         }
 
         .divisi-btn {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
             border-radius: 10px;
             padding: 13px 15px;
-            color: #d1d5db;
-            font-size: 0.8rem;
+            color: #4b5563;
+            font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
             text-align: left;
@@ -146,15 +168,14 @@
             color: var(--text-muted);
         }
         .divisi-btn:hover {
-            background: rgba(255, 204, 0, 0.04);
-            border-color: rgba(255, 204, 0, 0.25);
-            color: #fff;
+            background: #f3f4f6;
+            border-color: #d1d5db;
+            color: #111827;
         }
         .divisi-btn.active {
-            background: rgba(255, 204, 0, 0.08);
+            background: var(--primary-light);
             border-color: var(--primary);
-            color: var(--primary);
-            box-shadow: 0 0 12px rgba(255, 204, 0, 0.12);
+            color: #806600;
         }
         .divisi-btn.active i {
             color: var(--primary);
@@ -162,7 +183,7 @@
 
         /* === FORM CONTAINER DYNAMIC ANIMATION === */
         #containerFormPendaftaran {
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            border-top: 1px dashed #e5e7eb;
             padding-top: 10px;
             display: none;
             animation: fadeInForm 0.4s ease-out forwards;
@@ -183,9 +204,9 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--primary);
-            background: rgba(255, 204, 0, 0.08);
+            letter-spacing: 1.5px;
+            color: #806600;
+            background: var(--primary-light);
             padding: 4px 12px;
             border-radius: 4px;
             text-transform: uppercase;
@@ -196,7 +217,7 @@
             flex: 1;
             margin-left: 10px;
             height: 1px;
-            background: rgba(255, 204, 0, 0.15);
+            background: #e5e7eb;
         }
 
         .form-group {
@@ -208,7 +229,7 @@
             font-size: 0.78rem;
             font-weight: 700;
             margin-bottom: 6px;
-            color: #e5e7eb;
+            color: #374151;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -216,10 +237,10 @@
         .form-control {
             width: 100%;
             background: var(--input-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
             padding: 11px 14px;
-            color: #fff;
+            color: #111827;
             font-family: inherit;
             font-size: 0.88rem;
             transition: all 0.3s ease;
@@ -228,7 +249,8 @@
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(255, 204, 0, 0.12);
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(230, 184, 0, 0.15);
         }
 
         textarea.form-control {
@@ -246,13 +268,14 @@
 
         .radio-toggle-group label {
             background: var(--input-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid #e5e7eb;
             padding: 10px;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.85rem;
+            color: #4b5563;
             transition: all 0.2s ease;
             display: flex;
             justify-content: center;
@@ -265,10 +288,10 @@
         }
 
         .radio-toggle-group input[type="radio"]:checked + label {
-            background: rgba(255, 204, 0, 0.08);
+            background: var(--primary-light);
             border-color: var(--primary);
-            color: var(--primary);
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.1);
+            color: #806600;
+            font-weight: 700;
         }
 
         .btn-submit {
@@ -293,7 +316,16 @@
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.25);
+            box-shadow: 0 8px 20px rgba(230, 184, 0, 0.25);
+        }
+
+        /* Variasi tombol pas faksi rute owner */
+        .btn-submit.owner-route {
+            background: linear-gradient(135deg, #ff9900 0%, #ea580c 100%);
+            color: #fff;
+        }
+        .btn-submit.owner-route:hover {
+            box-shadow: 0 8px 20px rgba(234, 88, 12, 0.25);
         }
 
         .footer-note {
@@ -311,7 +343,7 @@
         
         <div class="header">
             <h1><span>PEACEFULLY CITY</span> REGISTRATION</h1>
-            <p>Portal Resmi Pendaftaran Divisi & Faksi Pemerintahan</p>
+            <p>Portal Resmi Pendaftaran Divisi & Faksi Pemerintahan (Goodside)</p>
         </div>
 
         <div class="syarat-box">
@@ -331,7 +363,7 @@
                 <i class="fa-solid fa-shield-halved"></i> 3. Polisi Las Venturas
             </button>
             <button class="divisi-btn" onclick="pilihDivisiForm('ADMINISTRASI_PRESIDEN_LOS_SANTOS', this)">
-                <i class="fa-solid fa-building-caption"></i> 4. Adm Presiden LS
+                <i class="fa-solid fa-crown"></i> 4. Pemerintah Los Santos
             </button>
             <button class="divisi-btn" onclick="pilihDivisiForm('RUMAH_SAKIT_LOS_SANTOS', this)">
                 <i class="fa-solid fa-house-medical"></i> 5. Rumah Sakit LS
@@ -357,6 +389,11 @@
             <button class="divisi-btn" onclick="pilihDivisiForm('ANGKATAN_UDARA', this)">
                 <i class="fa-solid fa-jet-fighter"></i> 12. Angkatan Udara
             </button>
+        </div>
+
+        <div id="alertNoLead" class="no-lead-box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>PEMBERITAHUAN: Instansi ini sedang kosong (Tidak ada Leader). Form pendaftaran Anda akan otomatis dialihkan langsung ke Owner Server!</span>
         </div>
 
         <div id="containerFormPendaftaran">
@@ -460,11 +497,11 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn-submit">
+                <button type="submit" id="submitBtn" class="btn-submit">
                     <i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> SELESAI & KIRIM KE WA LEAD
                 </button>
 
-                <p class="footer-note">Susunan teks otomatis rapi and langsung dialihkan ke nomor WhatsApp Lead.</p>
+                <p class="footer-note">Susunan teks otomatis rapi and langsung dialihkan ke nomor WhatsApp.</p>
             </form>
         </div>
 
@@ -472,37 +509,54 @@
 </div>
 
 <script>
+    // === CONFIG DATA: NOMOR WHATSAPP OWNER SERVER ===
+    const NOMOR_WHATSAPP_OWNER = "6285145204961"; // <-- AMANKAN/GANTI NOMOR OWNER DI SINI
+
     // === CONFIG DATA: DATABASE NOMOR WHATSAPP LEAD 12 FACTION ===
-    // Ubah angka di dalam tanda kutip dengan nomor WhatsApp Lead masing-masing faksi.
-    // Gunakan kode "62" di awal, dan dilarang keras memakai angka "0" di awal nomor HP.
+    // Kosongkan (ubah menjadi "") jika faksi tersebut sedang tidak ada Lead aktifnya!
     const databaseNomorLead = {
-        POLISI_LOS_SANTOS: "6285340030588",
-        POLISI_SAN_FIERRO: "6285340030588",
-        POLISI_LAS_VENTURAS: "6285340030588",
-        ADMINISTRASI_PRESIDEN_LOS_SANTOS: "6285340030588",
-        RUMAH_SAKIT_LOS_SANTOS: "6285340030588",
-        RUMAH_SAKIT_SAN_FIERRO: "6285340030588",
-        RUMAH_SAKIT_LAS_VENTURAS: "6285340030588",
-        PUSAT_RADIO: "6285340030588",
+        POLISI_LOS_SANTOS: "6288297110741",
+        POLISI_SAN_FIERRO: "",                // <--- CONTOH JIKA FA KOSONG (KOSONGKAN REKAN)
+        POLISI_LAS_VENTURAS: "",
+        ADMINISTRASI_PRESIDEN_LOS_SANTOS: "6283186723104",
+        RUMAH_SAKIT_LOS_SANTOS: "62812-30724539",
+        RUMAH_SAKIT_SAN_FIERRO: "",
+        RUMAH_SAKIT_LAS_VENTURAS: "",
+        PUSAT_RADIO: "",                      // <--- CONTOH JIKA FA KOSONG
         FBI: "6285730631250",
-        TENTARA_LS: "6285340030588",
-        ANGKATAN_LAUT: "6285340030588",
-        ANGKATAN_UDARA: "6285340030588"
+        TENTARA_LS: "",
+        ANGKATAN_LAUT: "6281358511088",
+        ANGKATAN_UDARA: ""
     };
 
     let faksiAktifSaatIni = "";
+    let statusFaksiTanpaLead = false;
 
     function pilihDivisiForm(keyFaksi, elemenTombol) {
-        // Ganti status menyala tombol yang diklik warga
         document.querySelectorAll('.divisi-btn').forEach(btn => btn.classList.remove('active'));
         elemenTombol.classList.add('active');
 
         faksiAktifSaatIni = keyFaksi;
         
-        // Ubah text input faksi otomatis sesuai tombol faksi
         let namaBersihFaksi = keyFaksi.replaceAll("_", " ");
         document.getElementById('ic_faksi').value = namaBersihFaksi;
         document.getElementById('labelFaksiTerpilih').innerText = "FORM OOC - " + namaBersihFaksi;
+
+        // SISTEM VALIDASI DETEKSI LEAD KOSONG
+        const alertBox = document.getElementById('alertNoLead');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        if (!databaseNomorLead[keyFaksi] || databaseNomorLead[keyFaksi].trim() === "") {
+            statusFaksiTanpaLead = true;
+            alertBox.style.display = "flex"; // Tampilkan Banner Alert Oranye-Merah hangat
+            submitBtn.classList.add('owner-route');
+            submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> HUBUNGI & DAFTAR CHAT OWNER`;
+        } else {
+            statusFaksiTanpaLead = false;
+            alertBox.style.display = "none";  // Sembunyikan Banner
+            submitBtn.classList.remove('owner-route');
+            submitBtn.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> SELESAI & KIRIM KE WA LEAD`;
+        }
 
         // Buka form pendaftaran di bawah grid
         document.getElementById('containerFormPendaftaran').style.display = "block";
@@ -530,10 +584,17 @@
         const licGun = document.querySelector('input[name="lic_gun"]:checked').value;
         const csStatus = document.querySelector('input[name="cs_status"]:checked').value;
 
-        const targetNoWA = databaseNomorLead[faksiAktifSaatIni] || "6285340030588";
+        // Arahkan ke Owner jika faksi tersebut di-set kosong nomornya
+        let targetNoWA = databaseNomorLead[faksiAktifSaatIni];
+        if (statusFaksiTanpaLead || !targetNoWA || targetNoWA.trim() === "") {
+            targetNoWA = NOMOR_WHATSAPP_OWNER;
+        }
 
-        // Struktur format teks wajib persis sesuai request template pendaftaran
+        // Struktur format teks wajib
         let textFormat = `//===========================//\n`;
+        if (statusFaksiTanpaLead) {
+            textFormat += `*⚠️ [PENDAFTARAN ALIH OWNER - FARE KOSONG]*\n`;
+        }
         textFormat += `// OOC //\n`;
         textFormat += `NAMA: ${oocNama}\n`;
         textFormat += `UMUR: ${oocUmur}\n`;

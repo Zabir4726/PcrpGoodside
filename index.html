@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTAL REKRUTMEN FACTION - PEACEFULLY CITY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #08090d;
+            --card-bg: rgba(16, 18, 26, 0.9);
+            --primary: #ffcc00;
+            --primary-glow: rgba(255, 204, 0, 0.25);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 204, 0, 0.15);
+            --input-bg: rgba(10, 11, 16, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(255, 204, 0, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(255, 204, 0, 0.04) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            margin: auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(255, 204, 0, 0.03);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.08);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .header h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .syarat-box {
+            background: rgba(255, 204, 0, 0.05);
+            border: 1px dashed var(--primary);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        /* === 12 FACTION LIST GRID SELECTOR === */
+        .divisi-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .divisi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        @media (max-width: 520px) {
+            .divisi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .divisi-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 13px 15px;
+            color: #d1d5db;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease-in-out;
+        }
+        .divisi-btn i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        .divisi-btn:hover {
+            background: rgba(255, 204, 0, 0.04);
+            border-color: rgba(255, 204, 0, 0.25);
+            color: #fff;
+        }
+        .divisi-btn.active {
+            background: rgba(255, 204, 0, 0.08);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 12px rgba(255, 204, 0, 0.12);
+        }
+        .divisi-btn.active i {
+            color: var(--primary);
+        }
+
+        /* === FORM CONTAINER DYNAMIC ANIMATION === */
+        #containerFormPendaftaran {
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-top: 10px;
+            display: none;
+            animation: fadeInForm 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeInForm {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0 15px 0;
+        }
+
+        .section-divider span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary);
+            background: rgba(255, 204, 0, 0.08);
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            margin-left: 10px;
+            height: 1px;
+            background: rgba(255, 204, 0, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #e5e7eb;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.88rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.12);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .radio-toggle-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .radio-toggle-group label {
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .radio-toggle-group input[type="radio"] {
+            display: none;
+        }
+
+        .radio-toggle-group input[type="radio"]:checked + label {
+            background: rgba(255, 204, 0, 0.08);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #ffcc00 0%, #e6b800 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            color: #050508;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            margin-top: 25px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.25);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        
+        <div class="header">
+            <h1><span>PEACEFULLY CITY</span> REGISTRATION</h1>
+            <p>Portal Resmi Pendaftaran Divisi & Faksi Pemerintahan</p>
+        </div>
+
+        <div class="syarat-box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>SYARAT MUTLAK: Level Karakter Minimal Level 7 In-Game!</span>
+        </div>
+
+        <div class="divisi-title"><i class="fa-solid fa-list-check" style="color:var(--primary)"></i> Pilih Faksi / Instansi:</div>
+        <div class="divisi-grid">
+            <button class="divisi-btn" onclick="pilihDivisiForm('POLISI_LOS_SANTOS', this)">
+                <i class="fa-solid fa-shield-halved"></i> 1. Polisi Los Santos
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('POLISI_SAN_FIERRO', this)">
+                <i class="fa-solid fa-shield-halved"></i> 2. Polisi San Fierro
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('POLISI_LAS_VENTURAS', this)">
+                <i class="fa-solid fa-shield-halved"></i> 3. Polisi Las Venturas
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('ADMINISTRASI_PRESIDEN_LOS_SANTOS', this)">
+                <i class="fa-solid fa-building-caption"></i> 4. Adm Presiden LS
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('RUMAH_SAKIT_LOS_SANTOS', this)">
+                <i class="fa-solid fa-house-medical"></i> 5. Rumah Sakit LS
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('RUMAH_SAKIT_SAN_FIERRO', this)">
+                <i class="fa-solid fa-house-medical"></i> 6. Rumah Sakit SF
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('RUMAH_SAKIT_LAS_VENTURAS', this)">
+                <i class="fa-solid fa-house-medical"></i> 7. Rumah Sakit LV
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('PUSAT_RADIO', this)">
+                <i class="fa-solid fa-radio"></i> 8. Pusat Radio
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('FBI', this)">
+                <i class="fa-solid fa-user-tie"></i> 9. FBI
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('TENTARA_LS', this)">
+                <i class="fa-solid fa-person-military-rifle"></i> 10. Tentara LS
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('ANGKATAN_LAUT', this)">
+                <i class="fa-solid fa-ship"></i> 11. Angkatan Laut
+            </button>
+            <button class="divisi-btn" onclick="pilihDivisiForm('ANGKATAN_UDARA', this)">
+                <i class="fa-solid fa-jet-fighter"></i> 12. Angkatan Udara
+            </button>
+        </div>
+
+        <div id="containerFormPendaftaran">
+            <form id="formPendaftaran">
+                
+                <div class="section-divider">
+                    <span id="labelFaksiTerpilih">Form - Out Of Character</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="ooc_nama">NAMA:</label>
+                    <input type="text" id="ooc_nama" class="form-control" placeholder="Masukkan nama OOC lu..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ooc_umur">UMUR:</label>
+                    <input type="number" id="ooc_umur" class="form-control" placeholder="Contoh: 17" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ooc_lama_main">SUDAH BERAPA LAMA MAIN SA-MP:</label>
+                    <input type="text" id="ooc_lama_main" class="form-control" placeholder="Contoh: 1 Tahun / 6 Bulan" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ooc_jam_main">PALING LAMA MAIN SA-MP BERAPA JAM:</label>
+                    <input type="text" id="ooc_jam_main" class="form-control" placeholder="Contoh: 5 Jam sehari" required>
+                </div>
+
+                <div class="section-divider">
+                    <span>In Character (IC)</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="ic_nama">NAMA:</label>
+                    <input type="text" id="ic_nama" class="form-control" placeholder="Contoh: Lamar_Smith" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ic_umur">UMUR:</label>
+                    <input type="number" id="ic_umur" class="form-control" placeholder="Contoh: 25" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ic_faksi">FRAKSI YANG MAU DI AMBIL:</label>
+                    <input type="text" id="ic_faksi" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ic_lama_sini">SUDAH BERAPA LAMA MAIN DISINI?:</label>
+                    <input type="text" id="ic_lama_sini" class="form-control" placeholder="Contoh: 3 Minggu" required>
+                </div>
+
+                <div class="section-divider">
+                    <span>Behavior Faksi</span>
+                </div>
+                <div class="form-group">
+                    <label>SEBUTKAN BEHAV YANG INGIN ANDA MEMASUKI FRAKSINYA:</label>
+                    <textarea id="behav_list" class="form-control" rows="5" placeholder="-&#10;-&#10;-&#10;-&#10;-" required></textarea>
+                </div>
+
+                <div class="section-divider">
+                    <span>VISI</span>
+                </div>
+                <div class="form-group">
+                    <label>VISI (Sebutkan Minimal 5 Baris/Poin):</label>
+                    <textarea id="visi_list" class="form-control" rows="5" placeholder="-&#10;-&#10;-&#10;-&#10;-" required></textarea>
+                </div>
+
+                <div class="section-divider">
+                    <span>MISI</span>
+                </div>
+                <div class="form-group">
+                    <label>MISI (Sebutkan Minimal 5 Baris/Poin):</label>
+                    <textarea id="misi_list" class="form-control" rows="5" placeholder="-&#10;-&#10;-&#10;-&#10;-" required></textarea>
+                </div>
+
+                <div class="section-divider">
+                    <span>Syarat Kelengkapan</span>
+                </div>
+
+                <div class="form-group">
+                    <label>-LIC GUN:</label>
+                    <div class="radio-toggle-group">
+                        <input type="radio" name="lic_gun" id="lic_on" value="ON" checked>
+                        <label for="lic_on"><i class="fa-solid fa-circle-check" style="margin-right:6px"></i> ON</label>
+                        
+                        <input type="radio" name="lic_gun" id="lic_off" value="OFF">
+                        <label for="lic_off"><i class="fa-solid fa-circle-xmark" style="margin-right:6px"></i> OFF</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>-CS:</label>
+                    <div class="radio-toggle-group">
+                        <input type="radio" name="cs_status" id="cs_on" value="ON" checked>
+                        <label for="cs_on"><i class="fa-solid fa-circle-check" style="margin-right:6px"></i> ON</label>
+                        
+                        <input type="radio" name="cs_status" id="cs_off" value="OFF">
+                        <label for="cs_off"><i class="fa-solid fa-circle-xmark" style="margin-right:6px"></i> OFF</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-brands fa-whatsapp" style="font-size:1.1rem"></i> SELESAI & KIRIM KE WA LEAD
+                </button>
+
+                <p class="footer-note">Susunan teks otomatis rapi and langsung dialihkan ke nomor WhatsApp Lead.</p>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // === CONFIG DATA: DATABASE NOMOR WHATSAPP LEAD 12 FACTION ===
+    // Ubah angka di dalam tanda kutip dengan nomor WhatsApp Lead masing-masing faksi.
+    // Gunakan kode "62" di awal, dan dilarang keras memakai angka "0" di awal nomor HP.
+    const databaseNomorLead = {
+        POLISI_LOS_SANTOS: "6285340030588",
+        POLISI_SAN_FIERRO: "6285340030588",
+        POLISI_LAS_VENTURAS: "6285340030588",
+        ADMINISTRASI_PRESIDEN_LOS_SANTOS: "6285340030588",
+        RUMAH_SAKIT_LOS_SANTOS: "6285340030588",
+        RUMAH_SAKIT_SAN_FIERRO: "6285340030588",
+        RUMAH_SAKIT_LAS_VENTURAS: "6285340030588",
+        PUSAT_RADIO: "6285340030588",
+        FBI: "6285730631250",
+        TENTARA_LS: "6285340030588",
+        ANGKATAN_LAUT: "6285340030588",
+        ANGKATAN_UDARA: "6285340030588"
+    };
+
+    let faksiAktifSaatIni = "";
+
+    function pilihDivisiForm(keyFaksi, elemenTombol) {
+        // Ganti status menyala tombol yang diklik warga
+        document.querySelectorAll('.divisi-btn').forEach(btn => btn.classList.remove('active'));
+        elemenTombol.classList.add('active');
+
+        faksiAktifSaatIni = keyFaksi;
+        
+        // Ubah text input faksi otomatis sesuai tombol faksi
+        let namaBersihFaksi = keyFaksi.replaceAll("_", " ");
+        document.getElementById('ic_faksi').value = namaBersihFaksi;
+        document.getElementById('labelFaksiTerpilih').innerText = "FORM OOC - " + namaBersihFaksi;
+
+        // Buka form pendaftaran di bawah grid
+        document.getElementById('containerFormPendaftaran').style.display = "block";
+        document.getElementById('containerFormPendaftaran').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // === SCRIPT KIRIM DIRECT WHATSAPP ===
+    document.getElementById('formPendaftaran').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const oocNama = document.getElementById('ooc_nama').value;
+        const oocUmur = document.getElementById('ooc_umur').value;
+        const oocLamaMain = document.getElementById('ooc_lama_main').value;
+        const oocJamMain = document.getElementById('ooc_jam_main').value;
+
+        const icNama = document.getElementById('ic_nama').value;
+        const icUmur = document.getElementById('ic_umur').value;
+        const icFaksi = document.getElementById('ic_faksi').value;
+        const icLamaSini = document.getElementById('ic_lama_sini').value;
+
+        const behavList = document.getElementById('behav_list').value;
+        const visiList = document.getElementById('visi_list').value;
+        const misiList = document.getElementById('misi_list').value;
+
+        const licGun = document.querySelector('input[name="lic_gun"]:checked').value;
+        const csStatus = document.querySelector('input[name="cs_status"]:checked').value;
+
+        const targetNoWA = databaseNomorLead[faksiAktifSaatIni] || "6285340030588";
+
+        // Struktur format teks wajib persis sesuai request template pendaftaran
+        let textFormat = `//===========================//\n`;
+        textFormat += `// OOC //\n`;
+        textFormat += `NAMA: ${oocNama}\n`;
+        textFormat += `UMUR: ${oocUmur}\n`;
+        textFormat += `SUDAH BERAPA LAMA MAIN SA-MP: ${oocLamaMain}\n`;
+        textFormat += `PALING LAMA MAIN SA-MP BERAPA JAM: ${oocJamMain}\n`;
+        textFormat += `//===========================//\n`;
+        textFormat += `// IC //\n`;
+        textFormat += `NAMA: ${icNama}\n`;
+        textFormat += `UMUR: ${icUmur}\n`;
+        textFormat += `FRAKSI YANG MAU DI AMBIL: ${icFaksi}\n`;
+        textFormat += `SUDAH BERAPA LAMA MAIN DISINI?: ${icLamaSini}\n`;
+        textFormat += `//===========================//\n`;
+        textFormat += `// SEBUTKAN BEHAV YANG INGIN ANDA MEMASUKI FRAKSINYA//\n${behavList}\n`;
+        textFormat += `//===========================//\n`;
+        textFormat += `// VISI //\n${visiList}\n`;
+        textFormat += `//===========================//\n`;
+        textFormat += `// MISI //\n${misiList}\n`;
+        textFormat += `//===========================//\n\n`;
+        textFormat += `-LIC GUN ${licGun}\n`;
+        textFormat += `-CS ${csStatus}\n\n`;
+        textFormat += `*MINIMAL LEVEL 7*`;
+
+        const urlWhatsApp = `https://api.whatsapp.com/send?phone=${targetNoWA}&text=${encodeURIComponent(textFormat)}`;
+        window.open(urlWhatsApp, '_blank');
+    });
+</script>
+
+</body>
+</html>
